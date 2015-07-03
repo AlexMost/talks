@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Observable are disposable</title>
+  </head>
+  <body>
+  <h1>Observable are disposable</h1>
+  <h3>Look at the console</h3>
+
+  <script src="../node_modules/babel-core/browser.js"></script>
+  <script src="../node_modules/rx/dist/rx.all.js"></script>
+  <script type="text/babel">
+
+    var source = Rx.Observable.create((observer) => {
+        var id = setTimeout(() => {
+            console.log("observable timeout hit");
+            observer.onNext(25);
+        }, 500);
+        console.log('observable started');
+        return () => {
+          console.log("dispose called")
+          clearTimeout(id);
+        }
+      });
+
+    var disposable = source.subscribe(
+      x => console.log(`observable value ${x}`));
+
+    setTimeout(() => disposable.dispose(), 100)
+
+  </script>
+  </body>
+</html>

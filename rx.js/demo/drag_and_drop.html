@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Drag and Drop demo</title>
+    <link rel="stylesheet" href="css/drag_and_drop.css">
+  </head>
+  <body>
+  <h1 class="noselect">Drag & drop demo</h1>
+  <div id="dragTarget"></div>
+
+  <script src="../node_modules/babel-core/browser.js"></script>
+  <script src="../node_modules/rx/dist/rx.all.js"></script>
+  <script src="../node_modules/rx-dom/dist/rx.dom.js"></script>
+  <script type="text/babel">
+
+    var dragTarget = document.getElementById('dragTarget');
+    var btnTarget = document.getElementById('okbtn')
+
+    // Get the three major events collections
+    var mouseup = Rx.DOM.fromEvent(dragTarget, 'mouseup');
+    var mousemove = Rx.DOM.fromEvent(document, 'mousemove');
+    var mousedown = Rx.DOM.fromEvent(dragTarget, 'mousedown');
+
+    var mousedrag = mousedown.flatMap(({offsetX, offsetY}) => {
+        return mousemove
+            .map(({clientX: x, clientY: y}) => {
+                return {left: x - offsetX, top: y - offsetY}})
+            .takeUntil(mouseup)
+        });
+
+    var subscription = mousedrag.subscribe((pos) => {
+        dragTarget.style.top = pos.top + 'px';
+        dragTarget.style.left = pos.left + 'px';
+    });
+
+  </script>
+  </body>
+</html>

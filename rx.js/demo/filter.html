@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Filter demo</title>
+    <link rel="stylesheet" href="css/drag_and_drop.css">
+  </head>
+  <body>
+  <h1 class="noselect">Filter demo</h1>
+  <div id="dragTarget"></div>
+
+  <script src="../node_modules/babel-core/browser.js"></script>
+  <script src="../node_modules/rx/dist/rx.all.js"></script>
+  <script src="../node_modules/rx-dom/dist/rx.dom.js"></script>
+  <script type="text/babel">
+
+    var dragTarget = document.getElementById('dragTarget');
+
+    // Get the three major events collections
+    var mouseup = Rx.DOM.fromEvent(dragTarget, 'mouseup');
+    var mousemove = Rx.DOM.fromEvent(document, 'mousemove');
+    var mousedown = Rx.DOM.fromEvent(dragTarget, 'mousedown');
+
+    var mousedrag = mousedown.flatMap(({offsetX, offsetY}) => {
+        return mousemove
+            .map(({clientX: x, clientY: y}) => {
+                return {left: x - offsetX, top: y - offsetY}})
+            .takeUntil(mouseup)
+        });
+
+    var mousedrag_in_area = mousedrag.filter(({top, left}) => {
+      return top <= 200 && left <= 200
+    });
+
+    var subscription = mousedrag_in_area.subscribe((pos) => {
+        dragTarget.style.top = pos.top + 'px';
+        dragTarget.style.left = pos.left + 'px';
+    });
+
+  </script>
+  </body>
+</html>

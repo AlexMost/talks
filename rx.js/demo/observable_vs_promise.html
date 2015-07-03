@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Observable compared to Promise</title>
+  </head>
+  <body>
+  <h1>Observable and Promise</h1>
+
+  <h3>Look at the console</h3>
+
+  <script src="../node_modules/babel-core/browser.js"></script>
+  <script src="../node_modules/rx/dist/rx.all.js"></script>
+  <script type="text/babel">
+
+    var promise = new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("promise timeout hit");
+            resolve(25);
+        }, 500);
+        console.log("promise started");
+    });
+
+    // promise.then(x => console.log(`promise value ${x}`));
+
+    // var source = Rx.Observable.create((observer) => {
+    //     setTimeout(() => {
+    //         console.log("observable timeout hit");
+    //         observer.onNext(25);
+    //     }, 500);
+    //     console.log('observable started');
+    // });
+
+    // source.subscribe(x => console.log(`observable value ${x}`));
+
+  </script>
+  </body>
+</html>

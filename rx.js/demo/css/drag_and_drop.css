@@ -1,0 +1,29 @@
+#dragTarget {
+    background-image: url(../img/smile.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 200px;
+    width: 200px;
+    background-color: #FFF; 
+    border: none;
+    color: #ffffff; 
+    padding: 10px; 
+    position: absolute;
+    cursor: move;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.wrapper_200 {
+    width: 480px;
+    height: 480px;
+    border: 1px solid gray;
+}
