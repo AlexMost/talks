@@ -1,2 +1,1 @@
-# kyivjs_2015
-Materials for kyivjs talk about Rx.js
+Materials for talk about Rx.js
