@@ -1,0 +1,23 @@
+{
+  "name": "talks",
+  "version": "1.0.0",
+  "description": "My talks materials",
+  "main": "rx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexMost/talks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexMost/talks/issues"
+  },
+  "homepage": "https://github.com/AlexMost/talks#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-gh-pages": "^0.5.2"
+  }
+}
